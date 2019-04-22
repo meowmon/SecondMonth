@@ -1,0 +1,105 @@
+<h2 class="text-center">New user</h2>
+<div class="container mx-auto">
+  <form [formGroup]="userInfo" (submit)="OnSubmit()">
+      <h4>User information:</h4>
+      <div class="form-group row no-margin">
+          <div class="col-md-6">
+              Firstname:
+              <input type="text" formControlName="firstName" class="form-control">
+              <div *ngIf="(submitted || userInfo.controls.firstName?.touched || userInfo.controls.firstName?.dirty) && userInfo.controls.firstName?.errors " class="error">
+                <div *ngIf="userInfo.controls.firstName.errors.required" style="color:red">Your first name is required
+                </div>
+              </div>
+          </div>
+      
+          <div class="col-md-6">
+              Lastname:
+              <input type="text" formControlName="lastName" class="form-control">
+              <div *ngIf="(submitted || userInfo.controls.lastName?.touched || userInfo.controls.lastName?.dirty) && userInfo.controls.lastName?.errors " class="error">
+                <div *ngIf="userInfo.controls.lastName.errors.required" style="color:red">Your last name is required</div>
+              </div>
+          </div>
+      </div>
+      <div class="form-group row no-margin">
+        <div class="col-md-6"> 
+          Date of Birth:
+          <input type="date" name="bday" max="3000-12-31" formControlName="bday"
+          min="1000-01-01" class="form-control">
+            <div *ngIf="(submitted || userInfo.get('bday')?.touched || userInfo.get('bday')?.dirty) && userInfo.get('bday')?.errors " class="error">
+              <div *ngIf="userInfo.get('bday')?.errors?.required" style="color:red">Your birthday is required</div>
+            </div>
+          </div>
+        <div class="col-md-2">Gender:</div>
+        <div class="col">
+          <div class="form-check">
+              <input type="radio" id="gender1" formControlName="gender" name="gender" class="form-check-input" value="Male">
+              <label class="form-check-label" for="gender1">Male</label>
+          </div>
+          <div class="form-check">
+              <input type="radio" id="gender2" formControlName="gender" name="gender" class="form-check-input" value="Female">
+              <label class="form-check-label" for="gender2">Female</label>
+          </div>
+        </div>
+      </div>
+      <h4>Contact information:</h4>
+      <fieldset formGroupName="contact">
+        <div class="form-group row no-margin">
+            <div class="col-md-2">
+                Phone:
+            </div>
+            <div class="col-md-10 ">
+                <div formArrayName="phones" *ngIf="phones.controls.length">
+                    <div *ngFor="let c of phones.controls; index as i">
+                     <label *ngIf="phones.controls.length > 1 ">Tel {{i+1}}: </label> 
+                      <div class=" input-group">
+                        <input class="form-control" type="text" id="example-tel-input" [formControlName]="i" placeholder="Tel {{i+1}}" aria-label="User tel" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2"  (click)="removeTel(i)" *ngIf="phones.controls.length > 1">-</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="(submitted || userInfo.get('contact.phones.0')?.touched || userInfo.get('contact.phones.0')?.dirty) && userInfo.get('contact.phones.0')?.errors " class="error">
+                      <div *ngIf="userInfo.get('contact.phones.0')?.errors?.required" style="color:red">At least one telephone number is required</div>
+                    </div>
+                <!-- <input type="text" formControlName="phone" class="form-control">
+                <div *ngIf="(userInfo.controls.lastName?.touched || userInfo.controls.lastName?.dirty) && userInfo.controls.lastName?.errors " class="error">
+                  <div *ngIf="userInfo.controls.lastName.errors.required" style="color:red">Your last name is required</div>
+                </div> -->
+                <button class="btn btn-outline-info btn-sm" (click)="addTel()" type="button"><i class="fas fa-plus-circle" >Add more Tel number</i></button>
+                
+            </div>
+        </div>
+        <div class="form-group row no-margin">
+            <div class="col">
+                Email:
+                <input type="text" formControlName="email" class="form-control">
+                <div *ngIf="(userInfo.get('contact.email')?.touched || userInfo.get('contact.email')?.dirty) && userInfo.get('contact.email')?.errors " class="error">
+                  <div *ngIf="userInfo.get('contact.email')?.errors?.required" style="color:red">Your email is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row no-margin">
+            <div class="col">
+                Address:
+                <textarea type="text" formControlName="address" class="form-control"></textarea>
+                <div *ngIf="(submitted || userInfo.get('contact.address')?.touched || userInfo.get('contact.address')?.dirty) && userInfo.get('contact.address')?.errors " class="error">
+                  <div *ngIf="userInfo.get('contact.address')?.errors?.required" style="color:red">Your email is required</div>
+                </div>
+            </div>
+        </div>
+      </fieldset>
+      <div class="form-group row no-margin">
+          <div class="col-md-6">
+              <label for="inputState">Region:</label>
+              <select id="inputState" class="form-control" formControlName="region">
+                <option selected value="null">Choose...</option>
+                <option *ngFor="let region of regions" value="{{region.value}}">{{region.value}}</option>
+              </select>
+            </div>
+      </div>
+      <div class="row no-margin">
+        <div class="col"><button class="btn btn-outline-primary btn-sm" type="submit"><i class="far fa-save"> Save</i></button></div>
+      </div>
+  </form>
+</div>

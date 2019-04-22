@@ -1,0 +1,11 @@
+.fluid-container{
+    background-color: rgba($color:black, $alpha: 0.9);
+    border-radius: 15px 15px 0px 0px;
+    padding: 5px 0px 0px 0px;
+    color : yellow;
+    font-family: 'Cute Font', cursive;
+    margin-bottom: -85px;
+}
+:hover.fluid-container{
+    margin-bottom: 0px;
+}

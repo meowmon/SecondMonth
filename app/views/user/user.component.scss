@@ -1,0 +1,23 @@
+.container{
+    background-color: rgba($color: white, $alpha: 0.5);
+    border-radius: 5px 5px 5px 5px;
+    padding: 10px 10px 10px 10px;
+    }
+i{
+   padding: 10px;
+}
+.deleteDialog{
+    margin-top: 312px;
+    width: fit-content;
+    height: 150px;
+    padding: 20px 20px 20px 20px;
+    border: outset 5px rgb(85, 134, 226);
+    background-image: linear-gradient(to bottom right, rgb(104, 235, 154), aqua);
+}
+.table-responsive{
+    margin-top: 10px;
+}
+h2{
+    font-family: 'Anton', sans-serif;
+    text-shadow: 2px 2px #ff0000;
+}
